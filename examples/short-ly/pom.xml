@@ -16,7 +16,6 @@
    <url>${project.parent.url}</url>
 
    <properties>
-      <joda.time.version>1.6</joda.time.version>
    </properties>
 
    <dependencies>
@@ -57,12 +56,6 @@
       <dependency>
          <groupId>com.ocpsoft</groupId>
          <artifactId>ocpsoft-pretty-time</artifactId>
-      </dependency>
-
-      <dependency>
-         <groupId>joda-time</groupId>
-         <artifactId>joda-time</artifactId>
-         <version>${joda.time.version}</version>
       </dependency>
 
       <dependency>
