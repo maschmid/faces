@@ -16,7 +16,7 @@
    <url>${project.parent.url}</url>
 
    <properties>
-      <hibernate.version>3.5.1-Final</hibernate.version>
+      <joda.time.version>1.6</joda.time.version>
    </properties>
 
    <dependencies>
@@ -30,6 +30,16 @@
          <groupId>org.jboss.seam.faces</groupId>
          <artifactId>seam-faces-impl</artifactId>
          <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+         <groupId>org.jboss.seam.persistence</groupId>
+         <artifactId>seam-persistence-api</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.jboss.seam.persistence</groupId>
+         <artifactId>seam-persistence-impl</artifactId>
       </dependency>
 
       <dependency>
@@ -50,18 +60,9 @@
       </dependency>
 
       <dependency>
-         <groupId>org.hibernate</groupId>
-         <artifactId>hibernate-core</artifactId>
-      </dependency>
-
-      <dependency>
-         <groupId>org.hibernate</groupId>
-         <artifactId>hibernate-entitymanager</artifactId>
-      </dependency>
-
-      <dependency>
-         <groupId>org.hsqldb</groupId>
-         <artifactId>hsqldb</artifactId>
+         <groupId>joda-time</groupId>
+         <artifactId>joda-time</artifactId>
+         <version>${joda.time.version}</version>
       </dependency>
 
       <dependency>

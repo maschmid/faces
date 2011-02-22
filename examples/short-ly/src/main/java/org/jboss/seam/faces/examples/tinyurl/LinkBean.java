@@ -33,9 +33,6 @@ public class LinkBean implements Serializable
    @PersistenceContext
    private EntityManager em;
 
-   @Resource(name = "java:app/Application_Level_DataSource")
-   private DataSource ds;
-
    private TinyLink link = new TinyLink();
 
    @Begin
