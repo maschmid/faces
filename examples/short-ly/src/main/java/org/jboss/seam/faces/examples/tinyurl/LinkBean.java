@@ -41,7 +41,6 @@ public class LinkBean implements Serializable
    {
       System.out.println("Created link: [ " + link.getName() + " => " + link.getTarget() + " ]");
       em.persist(link);
-      // ds.getConnection();
       return "pretty:create";
    }
 

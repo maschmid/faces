@@ -8,3 +8,9 @@
   ----
   
   To run the example on GlassFish Embedded, type mvn -Pglassfish
+
+  To deploy the example to jbossas 6:
+
+   export JBOSS_HOME=/path/to/jboss
+   mvn clean install jboss:hard-deploy -Pjbossas
+

@@ -72,10 +72,23 @@
 
    <profiles>
       <profile>
-         <id>default</id>
+         <id>distribution</id>
          <activation>
-            <activeByDefault>true</activeByDefault>
+            <property>
+               <name>release</name>
+            </property>
          </activation>
+         <build>
+            <plugins>
+               <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-assembly-plugin</artifactId>
+               </plugin>
+            </plugins>
+         </build>
+      </profile>
+      <profile>
+         <id>jbossas</id>
          <build>
             <plugins>
                <plugin>
@@ -103,9 +116,33 @@
                <plugin>
                   <groupId>org.glassfish</groupId>
                   <artifactId>maven-embedded-glassfish-plugin</artifactId>
+                  <!-- TODO: seam faces only works with Glassfish 3.1, which is not released yet, set to 3.1 once it is released. -->
+                  <version>3.1-b05</version>
                </plugin>
             </plugins>
          </build>
+         <dependencies>
+            <dependency>
+               <groupId>org.hibernate</groupId>
+               <artifactId>hibernate-core</artifactId>
+            </dependency>
+
+            <dependency>
+               <groupId>org.hibernate</groupId>
+               <artifactId>hibernate-entitymanager</artifactId>
+            </dependency>
+
+            <dependency>
+               <groupId>org.hsqldb</groupId>
+               <artifactId>hsqldb</artifactId>
+            </dependency>
+
+            <dependency>
+               <groupId>joda-time</groupId>
+               <artifactId>joda-time</artifactId>
+               <version>1.6.2</version>
+            </dependency>
+         </dependencies>
       </profile>
    </profiles>
 </project>
