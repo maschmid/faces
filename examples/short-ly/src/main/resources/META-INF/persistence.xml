@@ -7,7 +7,8 @@
 	   <!-- Default on JBossAS, select explicitly for Glassfish -->
       <provider>org.hibernate.ejb.HibernatePersistence</provider>
       <jta-data-source>jdbc/__default</jta-data-source>
-      <exclude-unlisted-classes>false</exclude-unlisted-classes>
+      <class>org.jboss.seam.faces.examples.tinyurl.TinyLink</class>
+      <exclude-unlisted-classes/>
       <properties>
          <!-- Properties for Hibernate (default provider for JBoss AS) -->
          <property name="hibernate.hbm2ddl.auto" value="create-drop"/>

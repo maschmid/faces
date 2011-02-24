@@ -29,6 +29,8 @@ import java.net.URL;
 import org.jboss.test.selenium.AbstractTestCase;
 import org.jboss.test.selenium.locator.XpathLocator;
 import static org.jboss.test.selenium.locator.LocatorFactory.*;
+import static org.jboss.test.selenium.locator.Attribute.HREF;
+import org.jboss.test.selenium.locator.AttributeLocator;
 import static org.jboss.test.selenium.guard.request.RequestTypeGuardFactory.*;
 
 /**
@@ -37,13 +39,13 @@ import static org.jboss.test.selenium.guard.request.RequestTypeGuardFactory.*;
  * @author Marek Schmidt
  *
  */
-class ShortlyTest extends AbstractTestCase {
+public class ShortlyTest extends AbstractTestCase {
 
-   protected XpathLocator URL_TEXT = xp("//input[ends-with(@name,':url')]");
-   protected XpathLocator NAME_TEXT = xp("//input[ends-with(@name,':name')]");
+   protected XpathLocator URL_TEXT = xp("//input[contains(@name,':url')]");
+   protected XpathLocator NAME_TEXT = xp("//input[contains(@name,':name')]");
    protected XpathLocator CREATE_BUTTON = xp("//input[contains(@value,'Create')]");
 
-   protected XpathLocator LINK1 = xp("//a[1]");
+   protected AttributeLocator FACES_LINK_HREF = xp("//a[text()=\"faces\"]").getAttribute(HREF);
 
    @BeforeMethod
    public void openStartUrl() throws MalformedURLException
@@ -58,6 +60,6 @@ class ShortlyTest extends AbstractTestCase {
       selenium.type(URL_TEXT, "http://www.seamframework.org/Seam3/FacesModule");
       selenium.type(NAME_TEXT, "faces");
       waitHttp(selenium).click(CREATE_BUTTON);
-      assertEquals(selenium.getText(LINK1), "faces");
+      assertEquals(selenium.getAttribute(FACES_LINK_HREF), "/short.ly/faces");
    }
 }
