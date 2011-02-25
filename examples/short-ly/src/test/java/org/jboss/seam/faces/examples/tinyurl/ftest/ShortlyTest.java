@@ -50,6 +50,8 @@ public class ShortlyTest extends AbstractTestCase {
    protected final XpathLocator ROOT_LINK = xp("//a[text()=\"root\"]");
    protected final AttributeLocator ROOT_LINK_HREF = ROOT_LINK.getAttribute(HREF);
 
+   protected final XpathLocator BAR_LINK = xp("//a[text()=\"bar\"]");
+
    @BeforeMethod
    public void openStartUrl() throws MalformedURLException
    {
@@ -80,5 +82,15 @@ public class ShortlyTest extends AbstractTestCase {
       waitHttp(selenium).click(DELETEALL_BUTTON);
       assertEquals(selenium.isElementPresent(DELETEALL_BUTTON), false);
       assertEquals(selenium.isElementPresent(ROOT_LINK), false);
+   }
+
+   @Test
+   public void testValidation()
+   {
+      selenium.type(URL_TEXT, "foo");
+      selenium.type(NAME_TEXT, "bar");
+      waitHttp(selenium).click(CREATE_BUTTON);
+      assertEquals(selenium.isTextPresent("Must be a valid web address"), true);
+      assertEquals(selenium.isElementPresent(BAR_LINK), false);
    }
 }
