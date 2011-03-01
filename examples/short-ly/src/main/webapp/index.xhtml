@@ -3,10 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.org/seam/faces"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <f:metadata>
 	<f:viewParam name="name" value="#{redirectBean.name}" />
+   <s:viewAction action="#{redirectBean.send}" if="#{!empty name}"/>
 </f:metadata>
 
 <h:head>
@@ -20,7 +22,7 @@
 			</label>
 			<h:inputText id="url" value="#{linkBean.link.target}" />
 			<br />
-			<label for="name">Name (optional): <h:messages for="name" /><br />
+			<label for="name">Name: <h:messages for="name" /><br />
 			</label>
 			<h:inputText id="name" value="#{linkBean.link.name}" />
 			<br />
