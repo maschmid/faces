@@ -5,7 +5,17 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.Resource;
+
+import javax.inject.Inject;
+
+import javax.ejb.Init;
 import javax.ejb.Stateful;
+import javax.ejb.PostActivate;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
+import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
@@ -32,24 +42,78 @@ public class LinkBean implements Serializable
 
    private TinyLink link = new TinyLink();
 
+   @Inject
+   private Conversation conversation;
+
+   @PostActivate
+   public void onActivate() {
+      System.out.println("LinkBean activating");
+   }
+
+   @PostConstruct
+   public void onConstruct() {
+      System.out.println("LinkBean construct");
+   }
+
+   @PreDestroy
+   public void onDestroy() {
+      System.out.println("LinkBean destroy");
+   }
+
+
    @Begin
    @End
    public String createLink() throws SQLException
    {
       System.out.println("Created link: [ " + link.getName() + " => " + link.getTarget() + " ]");
       em.persist(link);
-      return "pretty:create";
+      //return "pretty:create";
+      return "index";
+   }
+
+//   @End
+   public String updateLink() throws SQLException
+   {
+      System.out.println("Updated link id " + link.getId() + ": [ " + link.getName() + " => " + link.getTarget() + " ]");
+      em.persist(link);
+      conversation.end();
+
+      return "index";
+      //return "pretty:create";
+   }
+
+
+   public void setName(String name)
+   {
+	   this.link.setName(name);
+   }
+
+   public String getName()
+   {
+      return this.link.getName();
+   }
+
+  // @Begin   
+   public void editLink()
+   {
+      conversation.begin();
+      System.out.println("editLink for " + link.getName());
+	   setLink(getByKey(link.getName()));
    }
 
    @SuppressWarnings("unchecked")
    public TinyLink getByKey(final String key)
    {
+      System.out.println("geByKey " + key);
+
       Query query = em.createQuery("from TinyLink t where t.name=:key", TinyLink.class);
       query.setParameter("key", key);
       List<TinyLink> resultList = query.getResultList();
       if (resultList.isEmpty())
       {
-         return new TinyLink();
+         TinyLink newLink = new TinyLink();
+         newLink.setName(key);
+         return newLink;
       }
       return resultList.get(0);
    }
@@ -86,6 +150,7 @@ public class LinkBean implements Serializable
 
    public void setLink(final TinyLink link)
    {
+      System.out.println("set link id: " + link.getId());
       this.link = link;
    }
 }

@@ -5,4 +5,13 @@
               http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
               version="2.0">
 
+  <navigation-rule>
+      <from-view-id>/index.html</from-view-id>
+      <navigation-case>
+         <from-action>#{redirectBean.send}</from-action>
+         <from-outcome>index</from-outcome>
+         <to-view-id>/index.xhtml</to-view-id>
+         <redirect/>
+      </navigation-case>
+   </navigation-rule>
 </faces-config>

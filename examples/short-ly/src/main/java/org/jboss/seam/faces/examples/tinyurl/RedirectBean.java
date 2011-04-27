@@ -24,13 +24,23 @@ public class RedirectBean
 
    private String name;
 
-   public void send() throws IOException
+   public String send() throws IOException
    {
+	   
+	   System.out.println("send!");
+	   
       String url = linkBean.getByKey(name).getTarget();
+      if (url == null)
+      {
+         return "index";
+      }
+
       System.out.println("Sent redirect for key: " + name + " => " + url);
       HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
       response.sendRedirect(linkBean.format(url));
       context.responseComplete();
+      
+      return null;
    }
 
    public String getName()

@@ -15,6 +15,11 @@ import javax.validation.constraints.Pattern;
 @Entity
 public class TinyLink
 {
+   public TinyLink()
+   {
+      // System.out.println("TinyLink constructor");
+   }
+
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
    private Long id;

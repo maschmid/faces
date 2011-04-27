@@ -7,9 +7,10 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <f:metadata>
-	<f:viewParam name="name" value="#{redirectBean.name}" />
-   <s:viewAction action="#{redirectBean.send}" if="#{!empty name}"/>
+   <f:viewParam name="name" value="#{redirectBean.name}" />
+  <s:viewAction action="#{redirectBean.send}" if="#{!empty name}"/>
 </f:metadata>
+
 
 <h:head>
 </h:head>
@@ -35,6 +36,11 @@
 			<h:link outcome="/index" value="#{link.name}">
 				<f:param name="name" value="#{link.name}" />
 			</h:link>
+
+         <h:link outcome="/editLink" value="#{link.name}">
+				<f:param name="name" value="#{link.name}" />
+			</h:link>
+
 			<br />
 		</ui:repeat>
 
